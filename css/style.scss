@@ -1,0 +1,80 @@
+$headerHeight: 40px;
+$navHeight: 30px;
+
+@import "buttons.scss";
+
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+	position: relative;
+}
+
+body, html, #container {
+	height: 100%;
+}
+
+.container {
+	width: 800px;
+	margin: {
+		left: auto;
+		right: auto;
+	}
+}
+
+#header {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	height: $headerHeight;
+	width: 100%;
+	background-color: blue;
+	z-index: 1;
+
+	.button {
+
+	}
+}
+
+#container {
+	background-color: gray;
+	padding-top: $headerHeight + $navHeight;
+}
+
+#nav {
+	height: $navHeight;
+	width: 100%;
+	position: absolute;
+	top: $headerHeight;
+	background-color: purple;
+	font-size: 0px;
+
+	.button {
+		width: 33.333%; // 100% / #buttons
+	}
+}
+
+#pages {
+	width: 100%;
+	height: 100%;
+	background-color: red;
+	font-size: 0px; // to stop inline-blocks having a character sized margin
+	white-space: nowrap;
+	overflow: hidden;
+
+	.page {
+		width: 3%;
+		height: 100%;
+		display: inline-block;
+		background-color: yellow;
+		opacity: 0;
+
+		-webkit-transition: width .3s ease, opacity .3s ease;
+	}
+
+	.page.open {
+		width: 94%;
+		opacity: 1;
+		background-color: green;
+	}
+}
