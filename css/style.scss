@@ -4,6 +4,7 @@ $navHeight: 30px;
 $containerWidth: 800px;
 
 @import "buttons.scss";
+@import "content.scss";
 
 * {
 	margin: 0px;
@@ -48,6 +49,7 @@ body, html {
 	z-index: 1;
 	.button {
 		width: 33.333%; // 100% / #buttons
+		line-height: $navHeight;
 	}
 }
 
@@ -76,11 +78,6 @@ body, html {
 		.content {
 			width: $containerWidth;
 			overflow-y: scroll;
-
-			// reset text stuff
-			font-size: 12pt;
-			white-space: normal;
-			padding: 15px;
 		}
 	}
 
