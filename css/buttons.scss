@@ -5,4 +5,13 @@
 
 	font-size: 16pt;
 	text-align: center;
+	cursor: pointer;
+
+	&:hover {
+		color: gray;
+	}
+
+	&.selected {
+		color: white;
+	}
 }

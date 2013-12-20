@@ -3,6 +3,9 @@
 	<head>
 		<title>gccUI</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<!-- for production -->
+		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
+		<script src="js/jquery.min.js"></script>
 		<script src="js/main.js"></script>
 	</head>
 
@@ -14,19 +17,25 @@
 		</div>
 		<div id="container" class="container">
 			<div id="nav">
-				<div class="button" data-action="expand" data-target="#upload">upload</div>
+				<div class="button selected" data-action="expand" data-target="#upload">upload</div>
 				<div class="button" data-action="expand" data-target="#settings">customize</div>
 				<div class="button" data-action="expand" data-target="#result">review</div>
 			</div>
 			<div id="pages">
-				<div id="upload" class="page expanded">
-
+				<div id="upload" class="page expand">
+					<div class="content">
+						
+					</div>
 				</div>
 				<div id="settings" class="page">
+					<div class="content">
 
+					</div>
 				</div>
 				<div id="result" class="page">
+					<div class="content">
 
+					</div>
 				</div>
 			</div>
 

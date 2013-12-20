@@ -1,5 +1,7 @@
 $headerHeight: 40px;
 $navHeight: 30px;
+$containerWidth: 900px;
+$numPages: 3;
 
 @import "buttons.scss";
 
@@ -15,7 +17,7 @@ body, html, #container {
 }
 
 .container {
-	width: 800px;
+	width: $containerWidth;
 	margin: {
 		left: auto;
 		right: auto;
@@ -55,25 +57,37 @@ body, html, #container {
 }
 
 #pages {
-	width: 100%;
+	width: $containerWidth;
 	height: 100%;
-	background-color: red;
-	font-size: 0px; // to stop inline-blocks having a character sized margin
-	white-space: nowrap;
 	overflow: hidden;
 
+	background-color: red;
+
+	font-size: 0px; // to stop inline-blocks having a character sized margin
+	white-space: nowrap;
+
 	.page {
-		width: 3%;
+		width: 30px;
 		height: 100%;
 		display: inline-block;
-		background-color: yellow;
+		overflow: hidden;
 		opacity: 0;
+		-webkit-transition: width .4s ease, opacity .4s ease;
 
-		-webkit-transition: width .3s ease, opacity .3s ease;
+		background-color: yellow;
+
+		// reset text stuff
+		font-size: 12pt;
+		white-space: normal;
+
+		.content {
+			width: $containerWidth - 60px;
+			height: 100%;
+		}
 	}
 
-	.page.open {
-		width: 94%;
+	.page.expand {
+		width: $containerWidth - 60px;
 		opacity: 1;
 		background-color: green;
 	}
