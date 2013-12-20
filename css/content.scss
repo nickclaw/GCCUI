@@ -1,15 +1,42 @@
 .content {
-	font: {
-		size: 12pt;
-		family: Arial, sans-serif;
-	}
-
 	white-space: normal;
 	padding: 15px;
 }
 
-.button {
-	font: {
-		family: Arial, sans-serif;
+h1, h2, h3, h4, p, .button, li {
+	font-family: Arial, sans-serif;
+}
+
+p {
+	font-size: 13pt;
+	line-height: 16pt;
+}
+
+
+h1 {
+	font-size: 40px;
+	line-height: 50px;
+}
+
+h2 {
+	font-size: 30px;
+	line-height: 40px;
+}
+
+li {
+	font-size: 13pt;
+}
+
+.CodeMirror {
+	font-size: 10pt;
+	min-height: 300px;
+	height: auto !important;
+
+	.CodeMirror-sizer {
+		min-height: 300px !important;
+	}
+
+	.CodeMirror-gutter {
+		width: 2em;
 	}
 }

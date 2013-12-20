@@ -1,7 +1,8 @@
 "use strict";
-
+var editor;
 $(function() {
 
+	// register buttons
 	$('.button').click(function(evt) {
 		var button = $(this);
 		button.addClass('selected').siblings().removeClass('selected');
@@ -12,6 +13,10 @@ $(function() {
 		$(target).addClass(action).siblings().removeClass(action);
 	});
 
-	
+	// create codemirror javascript editor
+	var editor = CodeMirror.fromTextArea(document.getElementById('codemirror'), {
+		lineNumbers: true
+	});
 
+	
 });

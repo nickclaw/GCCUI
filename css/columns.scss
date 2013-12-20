@@ -1,0 +1,22 @@
+.column {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.fourths {
+	.column.one {
+		width: 25%;
+	}
+
+	.column.two {
+		width: 50%;
+	}
+
+	.column.three {
+		width: 75%;
+	}
+
+	.column.four {
+		width: 100%;
+	}
+}

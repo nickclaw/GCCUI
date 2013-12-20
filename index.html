@@ -3,10 +3,13 @@
 	<head>
 		<title>gccUI</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/external/codemirror.css" />
 		<!-- for production -->
 		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
-		<script src="js/jquery.min.js"></script>
+		<script src="js/external/jquery.min.js"></script>
 		<script src="js/main.js"></script>
+		<script src="js/external/codemirror.js"></script>
+		<script src="js/external/javascript.js"></script>
 	</head>
 
 	<body>
@@ -27,18 +30,32 @@
 		<div id="container" class="container">
 			<div id="pages">
 				<div id="upload" class="page expand">
-					<div class="content">
-						<h2>Code</h2>
+					<div class="content fourths">
+						<div class="column three">
+							<h2 class="codeTitle">custom script</h2>
+							<textarea id="codemirror">// your custom javascript goes here</textarea>
+						</div>
+						<div class="column one">
+							<ul class="options">
+								<li>custom script</li>
+								<li>custom script</li>
+								<li>custom script</li>
+								<li>custom script</li>
+								<li>custom script</li>
+								<li>custom script</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 				<div id="settings" class="page">
 					<div class="content">
-						<h2>Settings</h2>
+							<h1>sfs</h1>
+							<p>lasfjlas; s falsj fasf a gldgj lgsdlg slg;j sgsl gsldgj ssl g</p>
 					</div>
 				</div>
 				<div id="result" class="page">
 					<div class="content">
-						<h2>Results</h2>
+						
 					</div>
 				</div>
 			</div>
