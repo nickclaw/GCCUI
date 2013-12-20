@@ -1,7 +1,7 @@
 $headerHeight: 40px;
+$footerHeight: 50px;
 $navHeight: 30px;
-$containerWidth: 900px;
-$numPages: 3;
+$containerWidth: 800px;
 
 @import "buttons.scss";
 
@@ -12,7 +12,7 @@ $numPages: 3;
 	position: relative;
 }
 
-body, html, #container {
+body, html {
 	height: 100%;
 }
 
@@ -30,17 +30,12 @@ body, html, #container {
 	left: 0px;
 	height: $headerHeight;
 	width: 100%;
-	background-color: blue;
-	z-index: 1;
+	background-color: #f1f1f1;
+	z-index: 2;
 
 	.button {
 
 	}
-}
-
-#container {
-	background-color: gray;
-	padding-top: $headerHeight + $navHeight;
 }
 
 #nav {
@@ -48,47 +43,56 @@ body, html, #container {
 	width: 100%;
 	position: absolute;
 	top: $headerHeight;
-	background-color: purple;
+	background-color: #444;
 	font-size: 0px;
-
+	z-index: 1;
 	.button {
 		width: 33.333%; // 100% / #buttons
 	}
 }
 
+#container {
+	min-height: 100%;
+	padding-top: $headerHeight + $navHeight;
+
+	padding-bottom: $footerHeight;
+	margin-bottom: -$footerHeight;
+}
+
 #pages {
 	width: $containerWidth;
-	height: 100%;
 	overflow: hidden;
-
-	background-color: red;
 
 	font-size: 0px; // to stop inline-blocks having a character sized margin
 	white-space: nowrap;
 
 	.page {
-		width: 30px;
-		height: 100%;
+		width: 0px;
 		display: inline-block;
 		overflow: hidden;
 		opacity: 0;
 		-webkit-transition: width .4s ease, opacity .4s ease;
 
-		background-color: yellow;
-
-		// reset text stuff
-		font-size: 12pt;
-		white-space: normal;
-
 		.content {
-			width: $containerWidth - 60px;
-			height: 100%;
+			width: $containerWidth;
+			overflow-y: scroll;
+
+			// reset text stuff
+			font-size: 12pt;
+			white-space: normal;
+			padding: 15px;
 		}
 	}
 
 	.page.expand {
-		width: $containerWidth - 60px;
+		width: $containerWidth;
 		opacity: 1;
-		background-color: green;
 	}
+}
+
+#footer {
+	width: 100%;
+	height: $footerHeight;
+
+	background-color: #444;
 }
