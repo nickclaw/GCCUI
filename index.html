@@ -7,9 +7,12 @@
 		<!-- for production -->
 		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
 		<script src="js/external/jquery.min.js"></script>
+		<script src="js/utilities.js"></script>
+		<script src="js/ScriptManager.js"></script>
 		<script src="js/main.js"></script>
 		<script src="js/external/codemirror.js"></script>
 		<script src="js/external/javascript.js"></script>
+		<script src="js/external/jquery.sortable.min.js"></script>
 	</head>
 
 	<body>
@@ -29,31 +32,33 @@
 
 		<div id="container" class="container">
 			<div id="pages">
-				<div id="upload" class="page expand">
+				<div id="upload" class="page expand" data-parent="#pages">
 					<div class="content fourths">
 						<div class="column three">
-							<h2 class="codeTitle">custom script</h2>
-							<textarea id="codemirror">// your custom javascript goes here</textarea>
+							<div id="codeContainer" class="hidden">
+								<h2 id="codeTitle" contenteditable>custom script</h2>
+								<textarea id="codemirror"></textarea>
+							</div>
+							<div id="codeInstructions">
+								<h2>Add your code here</h2>
+							</div>
 						</div>
 						<div class="column one">
-							<ul class="options">
-								<li>custom script</li>
-								<li>custom script</li>
-								<li>custom script</li>
-								<li>custom script</li>
-								<li>custom script</li>
-								<li>custom script</li>
-							</ul>
+							<button class="left" id="customScript">custom</button>
+							<button class="mid" id="uploadScript">file</button>
+							<button class="right" id="urlScript">url</button>
+							
+							<ul id="codeOptions" class="sortable"></ul> <!-- make sure no text inside -->
 						</div>
 					</div>
 				</div>
-				<div id="settings" class="page">
+				<div id="settings" class="page" data-parent="#pages">
 					<div class="content">
 							<h1>sfs</h1>
 							<p>lasfjlas; s falsj fasf a gldgj lgsdlg slg;j sgsl gsldgj ssl g</p>
 					</div>
 				</div>
-				<div id="result" class="page">
+				<div id="result" class="page" data-parent="#pages">
 					<div class="content">
 						
 					</div>
