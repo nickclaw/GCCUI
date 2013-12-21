@@ -4,7 +4,7 @@
 	overflow: hidden;
 	.script-element.selected {
 		color: white;
-		background-color: blue;
+		background-color: rgb(80,116, 211);
 	}
 }
 
@@ -14,7 +14,7 @@
 	list-style: none;
 	display: list-item;
 	font-size: 13pt;
-	background-color: #EEE;
+	background-color: rgb(235,235,235);
 	border-radius: 8px;
 	margin: 4px 0px;
 }

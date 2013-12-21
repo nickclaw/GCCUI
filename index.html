@@ -18,7 +18,7 @@
 	<body>
 		<div id="header">
 			<div class="container">
-				<h1>gccUI</h1>
+				<img id="logo" src="image/logo.png" />
 			</div>
 		</div>
 
@@ -37,15 +37,15 @@
 						<div class="column four">
 							<div id="codeContainer" class="hidden">
 								<h2 id="codeTitle" contenteditable>custom script</h2>
-								<textarea id="codemirror">// hello world</textarea>
+								<textarea id="codemirror"></textarea>
 							</div>
 							<div id="codeInstructions">
-								<h2>Add your code here</h2>
+								<h2>Add your code</h2>
 								<p>Add javascripts files to compile. You can upload your own files by dragging and dropping them right here or using the upload button to the right. If that's not your cup of tea, you can write your own custom javascript directly from the site by clicking the 'custom' button on the right, or import an external javascript file using the 'url' button.</p>
 
 								<p>During compilation, all the scripts you add will be concatenated in the order given. Drag and drop the script names on the right to get the order <i>just</i> right.</p>
 
-								<p>Want to use external libraries like jQuery without having to compile them? Read about <a href="">externs</a> which you can add on next page.</p>
+								<p>Want to use external libraries like jQuery without having to compile it with your code? Learn about <a href="">externs</a> which you can add on next page.</p>
 							</div>
 						</div>
 						<div class="column one">
@@ -58,9 +58,14 @@
 					</div>
 				</div>
 				<div id="settings" class="page" data-parent="#pages">
-					<div class="content">
-							<h1>sfs</h1>
-							<p>lasfjlas; s falsj fasf a gldgj lgsdlg slg;j sgsl gsldgj ssl g</p>
+					<div class="content fourths">
+						<div class="column two">
+							<h2>Customize your settings</h2>
+							<p>Choose your compilation level, add externs, and set any optional flags that your code might need.</p>
+						</div>
+						<div class="column two">
+							
+						</div>
 					</div>
 				</div>
 				<div id="result" class="page" data-parent="#pages">

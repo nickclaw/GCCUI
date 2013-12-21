@@ -4,14 +4,9 @@
  */
 function ScriptManager(editor) {
 
-	/** @type Array.<Object> */
 	this.scripts = [];
-
-	this.count = 0;
-
-	/** @type {Object} */
 	this.current = null;
-
+	this.count = 0;
 	this.editor = editor;
 
 	var check = function() {
