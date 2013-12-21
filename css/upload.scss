@@ -37,3 +37,19 @@
 	background-color: white;
 	cursor: pointer;
 }
+
+.column.four p {
+	padding-right: 200px;
+}
+
+.column.one {
+	z-index: 7;
+	opacity: .2;
+	position: absolute;
+	right: 0px;
+	-webkit-transition: opacity .4s ease;
+}
+
+.column.one:hover {
+	opacity: .9;
+}

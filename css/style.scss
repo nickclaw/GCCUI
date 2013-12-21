@@ -35,7 +35,7 @@ body, html {
 	width: 100%;
 	min-width: $containerWidth;
 	background-color: #f1f1f1;
-	z-index: 6; // higher than codemirror
+	z-index: 15; // higher than codemirror
 
 	.button {
 
@@ -50,7 +50,7 @@ body, html {
 	top: $headerHeight;
 	background-color: #444;
 	font-size: 0px;
-	z-index: 5;
+	z-index: 14;
 	.button {
 		width: 33.333%; // 100% / #buttons
 		line-height: $navHeight;

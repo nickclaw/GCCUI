@@ -34,20 +34,25 @@
 			<div id="pages">
 				<div id="upload" class="page expand" data-parent="#pages">
 					<div class="content fourths">
-						<div class="column three">
+						<div class="column four">
 							<div id="codeContainer" class="hidden">
 								<h2 id="codeTitle" contenteditable>custom script</h2>
-								<textarea id="codemirror"></textarea>
+								<textarea id="codemirror">// hello world</textarea>
 							</div>
 							<div id="codeInstructions">
 								<h2>Add your code here</h2>
+								<p>Add javascripts files to compile. You can upload your own files by dragging and dropping them right here or using the upload button to the right. If that's not your cup of tea, you can write your own custom javascript directly from the site by clicking the 'custom' button on the right, or import an external javascript file using the 'url' button.</p>
+
+								<p>During compilation, all the scripts you add will be concatenated in the order given. Drag and drop the script names on the right to get the order <i>just</i> right.</p>
+
+								<p>Want to use external libraries like jQuery without having to compile them? Read about <a href="">externs</a> which you can add on next page.</p>
 							</div>
 						</div>
 						<div class="column one">
 							<button class="left" id="customScript">custom</button>
 							<button class="mid" id="uploadScript">file</button>
 							<button class="right" id="urlScript">url</button>
-							
+
 							<ul id="codeOptions" class="sortable"></ul> <!-- make sure no text inside -->
 						</div>
 					</div>

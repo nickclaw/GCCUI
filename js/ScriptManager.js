@@ -15,7 +15,7 @@ function ScriptManager(editor) {
 	this.editor = editor;
 
 	var check = function() {
-		if ( $('#codeOptions').children().length !== 0 ) {
+		if ( self.scripts.length !== 0 ) {
 			$('#codeContainer').removeClass('hidden');
 			$("#codeInstructions").addClass('hidden');
 		} else {
@@ -64,16 +64,19 @@ function ScriptManager(editor) {
 			}
 		}
 
-		self.scripts.push(script);
-
 		element.getScript = function() {
 			return script;
 		}
+
+		self.count++;
 
 		return script;
 	}
 
 	this.addScript = function(script) {
+		self.scripts.push(script);
+		check(); // do this before selecting anything, or else stuff might not draw
+
 		$('#codeOptions')
 			.append(
 				$(script.element())
@@ -104,9 +107,6 @@ function ScriptManager(editor) {
 					.click()
 			)
 			.sortable();
-
-		self.count++;
-		check();
 	}
 
 	this.removeScript = function(script) {
