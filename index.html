@@ -8,7 +8,6 @@
 		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
 		<script src="js/external/jquery.min.js"></script>
 		<script src="js/utilities.js"></script>
-		<script src="js/ScriptManager.js"></script>
 		<script src="js/ScriptComponent.js"></script>
 		<script src="js/main.js"></script>
 		<script src="js/external/codemirror.js"></script>
@@ -50,11 +49,19 @@
 							</div>
 						</div>
 						<div class="column one">
-							<div id="codeOptions">
-								<!-- filled by script -->
+							<div id="codeOptions" class="script-container">
+								<h3>code</h3>
+								<button class='left control' data-event='custom'>custom</button>
+								<button class='mid control' data-event='upload'>upload</button>
+								<button class='right control' data-event='url'>url</button>
+								<ul class='script-options'></ul>
 							</div>
 							<div id="externOptions">
-								<!-- filled by script -->
+								<h3>externs</h3>
+								<button class='left control' data-event='custom'>custom</button>
+								<button class='mid control' data-event='upload'>upload</button>
+								<button class='right control' data-event='url'>url</button>
+								<ul class='script-options'></ul>
 							</div>
 						</div>
 					</div>

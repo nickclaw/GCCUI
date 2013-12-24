@@ -2,11 +2,13 @@
 
 $(function() {
 
+	// create codemirror javascript editor
 	var editor = CodeMirror.fromTextArea(document.getElementById('codemirror'), {
 		lineNumbers: true
 	});
 
-	// register navigation buttons
+
+	// handle navigation buttons
 	$('#nav .button').click(function(evt) {
 		var button = $(this);
 		button.addClass('selected').siblings().removeClass('selected');
@@ -14,13 +16,16 @@ $(function() {
 		var target = button.attr('data-target');
 		var action = button.attr('data-action');
 
-		uniqueSet($(target), action);
+		$(target)
+			.addClass(action)
+			.siblings()
+				.removeClass(action);
 	});
 
-	$('#codeTitle').on('input', function(evt) {
-		manager.current.title(this.innerHTML);
-	});
 
+	// this function is used to check for scripts/externs
+	// if there is none it shows the instructions
+	// otherwise it shows the editor
 	var check = function() {
 		if ($('.script-element').size() !== 0 ) {
 			$('#codeInstructions').addClass('hidden');
@@ -31,45 +36,30 @@ $(function() {
 			$('#codeContainer').addClass('hidden');
 		}
 	}
+
+	// initialize variables to keep track of number of scripts generated
 	var codeCount = 0
 	var externCount = 0;
-	var codeManager = $("#codeOptions").scriptify('code')
+
+
+	// create code manager and apply unique listeners
+	var codeManager = $("#codeOptions").scriptify()
 		.on('custom', function(button) {
 			this.newScript('custom-script-'+(codeCount++)+'.js', '// your custom javascript here');
-		})
-		.on('upload', function(button) {
-			var manager = this;
-			openFileDialogue(function(evt) {
-				var filelist = evt.target.files;
-				$.each(filelist, function(index, file) {
-					if (file.name.match(/\.js$/)) {
-
-						readFile(file, function(evt) {
-							manager.newScript(file.name, evt.target.result);
-						});
-
-					}
-				});
-			})
-		})
-		.on('url', function(evt) {
-
-		})
-		.on('select', function(old, current) {
-			check();
-			if (old.size() > 0) {
-				old[0].script.code = editor.getValue();
-			}
-			editor.setValue(current[0].script.code);
-		})
-		.on('delete', function(old, current) {
-			check();
 		});
+	
+	// create extern manager and apply unique listeners
 	var externManager = $("#externOptions").scriptify('externs')
 		.on('custom', function(button) {
 			this.newScript('custom-extern-'+(externCount++)+'.js', '// your custom javascript here');
-		})
-		.on('upload', function(button) {
+		});
+
+	// apply common listeners
+	$.each([codeManager, externManager], function(index, manager) {
+		manager
+
+			// open a file dialogue and create a new script for each .js/.json file uploaded
+			.on('upload', function(button) {
 			var manager = this;
 			openFileDialogue(function(evt) {
 				var filelist = evt.target.files;
@@ -84,6 +74,9 @@ $(function() {
 				});
 			})
 		})
+
+		// open a url dialogue and create a script for imported text
+		// TODO make it work
 		.on('url', function(evt) {
 			openUrlDialogue(function(url) {
 				$.ajax(url, {
@@ -94,6 +87,9 @@ $(function() {
 				});
 			});
 		})
+
+		// save changes to old script and update editor with new scripts code
+		// also check to see if editor should be visible
 		.on('select', function(old, current) {
 			check();
 			if (old.size() > 0) {
@@ -101,7 +97,10 @@ $(function() {
 			}
 			editor.setValue(current[0].script.code);
 		})
+
+		// check to see if editor should be visible
 		.on('delete', function(old, current) {
 			check();
 		});
+	});
 });

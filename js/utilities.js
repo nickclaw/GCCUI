@@ -1,9 +1,5 @@
-function uniqueSet(target, cls) {
-	var parent = target.attr('data-parent')?$(target.attr('data-parent')):target.parent();
-	parent.children().removeClass(cls);
-	target.addClass(cls);
-}
-
+// opens the systems default file picker, calls onchange callback with FileList of chosen file(s)
+// TODO make sure this trick works on all browsers (tested on Chrome 31, Safari 7)
 function openFileDialogue(onchange) {
 	$( document.createElement('input') )
 		.attr('type', 'file')
@@ -12,6 +8,18 @@ function openFileDialogue(onchange) {
 		.click();
 }
 
+// used a FileReader object to convert a Blob into utf-8 text
+// calls callback with @this as the file
+function readFile(file, callback) {
+	reader = new FileReader();
+	reader.onload = function(evt) {
+		callback.call(file, evt)
+	}
+	reader.readAsText(file);
+}
+
+// opens a dialogue box for URL input
+// TODO make it actually work well and be customizable
 function openUrlDialogue(onurl) {
 	$(document.body).append(
 		$(
@@ -35,18 +43,4 @@ function openUrlDialogue(onurl) {
 			}
 		})
 	);
-}
-
-function loadScript(url) {
-	$.get(url, function() {
-		console.log(this, arguments);
-	});
-}
-
-function readFile(file, callback) {
-	reader = new FileReader();
-	reader.onload = function(evt) {
-		callback.call(file, evt)
-	}
-	reader.readAsText(file);
 }
