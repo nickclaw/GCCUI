@@ -1,10 +1,26 @@
 .content {
 	white-space: normal;
 	padding: 15px;
+	min-height: 300px;
 }
 
 * {
 	font-family: Arial, sans-serif;
+}
+
+label {
+	display: block;
+	margin: 10px 5px;
+}
+
+fieldset {
+	font-size: 12pt;
+	padding: 0px 10px 25px 10px;
+	border: none;
+}
+
+input {
+	margin-right: 10px;
 }
 
 p {
@@ -25,6 +41,11 @@ h2 {
 	line-height: 40px;
 }
 
+h3 {
+	font-size: 20px;
+	line-height: 20px;
+}
+
 li {
 	font-size: 13pt;
 }
@@ -41,4 +62,39 @@ li {
 	.CodeMirror-gutter {
 		width: 2em;
 	}
+}
+
+.dialogue {
+	position: fixed;
+	width: 50%;
+	top: 200px;
+	left: 25%;
+	background: white;
+	padding: 40px;
+	border-radius: 25px;
+	z-index: 10;
+
+	h3, input, p, button {
+		margin-bottom: 5px;
+	}
+
+	button {
+		float: right;
+	}
+
+	input {
+		width: 100%;
+		font-size: 15pt;
+	}
+}
+
+.overlay {
+	z-index: 10;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background: black;
+	opacity: .4;
 }

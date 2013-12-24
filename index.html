@@ -9,6 +9,7 @@
 		<script src="js/external/jquery.min.js"></script>
 		<script src="js/utilities.js"></script>
 		<script src="js/ScriptManager.js"></script>
+		<script src="js/ScriptComponent.js"></script>
 		<script src="js/main.js"></script>
 		<script src="js/external/codemirror.js"></script>
 		<script src="js/external/javascript.js"></script>
@@ -49,23 +50,64 @@
 							</div>
 						</div>
 						<div class="column one">
-							<button class="left" id="customScript">custom</button>
-							<button class="mid" id="uploadScript">file</button>
-							<button class="right" id="urlScript">url</button>
-
-							<ul id="codeOptions" class="sortable"></ul> <!-- make sure no text inside -->
+							<div id="codeOptions">
+								<!-- filled by script -->
+							</div>
+							<div id="externOptions">
+								<!-- filled by script -->
+							</div>
 						</div>
 					</div>
 				</div>
 				<div id="settings" class="page" data-parent="#pages">
 					<div class="content fourths">
-						<div class="column two">
+						<form id="settings">
 							<h2>Customize your settings</h2>
 							<p>Choose your compilation level, add externs, and set any optional flags that your code might need.</p>
-						</div>
-						<div class="column two">
-							
-						</div>
+							<div class="column two">
+								<fieldset>
+									<legend>Compilation Level</legend>
+									<label>
+										<input type="radio" name="compilation_level" value="WHITESPACE_ONLY" />Whitespace Only
+									</label>
+									<label>
+										<input type="radio" name="compilation_level" value="SIMPLE_OPTIMIZATIONS" checked="checked" />Simple Optimization
+									</label>
+									<label>
+										<input type="radio" name="compilation_level" value="ADVANCED_OPTIMIZATIONS" />Advanced Compilation
+									</label>
+
+								</fieldset>
+
+								<fieldset>
+									<legend>Formatting</legend>
+									<label>
+										<input type="checkbox" name="formatting" value="pretty_print" />Pretty print
+									</label>
+									<label>
+										<input type="checkbox" name="formatting" value="print_output_delimiter" />Print output delimiter
+									</label>
+
+								</fieldset>
+							</div>
+							<div class="column two">
+								<fieldset>
+									<legend>Warning Level</legend>
+									<label>
+										<input type="radio" name="warning_level" value="QUIET" />Quiet
+									</label>
+									<label>
+										<input type="radio" name="warning_level" value="DEFAULT" checked="checked" />Default
+									</label>
+									<label>
+										<input type="radio" name="warning_level" value="VERBOSE" />Verbose
+									</label>
+								</fieldset>
+								<fieldset>
+									Output file name <input name="output_file_name" value="script.js" />
+								</fieldset>
+							</div>
+						</form>
 					</div>
 				</div>
 				<div id="result" class="page" data-parent="#pages">

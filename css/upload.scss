@@ -1,14 +1,28 @@
-#codeOptions {
+.script-options {
 	width: 100%;
 	border-radius: 8px;
 	overflow: hidden;
-	.script-element.selected {
-		color: white;
-		background-color: rgb(80,116, 211);
+
+	.script-element {
+		cursor: pointer;
+
+	 	&.selected {
+	 		cursor: auto;
+	 		color: white;
+			background-color: rgb(80,116, 211);
+	 	}
+
+		.delete {
+			float: right;
+			width: 20px;
+			height: 20px;
+			background-color: white;
+			cursor: pointer;
+		}
 	}
 }
 
-#codeOptions:empty:after, #codeOptions .script-element {
+.script-options:empty:after, .script-options > * {
 	width: 100%;
 	padding: 10px;
 	list-style: none;
@@ -19,37 +33,30 @@
 	margin: 4px 0px;
 }
 
-#codeOptions:empty:after {
+.script-options:empty:after {
 	content: "No scripts yet";
 	font-size: 12pt;
 	width: 100%;
 	box-sizing: border-box;
 }
 
-#codeTitle {
-	
-}
-
-.script-element .delete {
-	float: right;
-	width: 20px;
-	height: 20px;
-	background-color: white;
-	cursor: pointer;
-}
-
-.column.four p {
-	padding-right: 200px;
+.column.four {
+	margin-right: -25%;
+	p {
+		padding-right: 200px;
+	}
 }
 
 .column.one {
 	z-index: 7;
 	opacity: .2;
-	position: absolute;
-	right: 0px;
 	-webkit-transition: opacity .4s ease;
 }
 
 .column.one:hover {
 	opacity: .9;
+}
+
+.script-container {
+	margin-bottom: 15px;
 }
