@@ -1,13 +1,13 @@
 .button {
 	height: 100%;
 	display: inline-block;
-
-	font-size: 14pt;
 	text-align: center;
 	cursor: pointer;
+	padding: 0px 10px;
 }
 
-#nav .button {
+
+.nav .button {
 	color: white;
 
 	&:hover {

@@ -9,7 +9,7 @@ $(function() {
 
 
 	// handle navigation buttons
-	$('#nav .button').click(function(evt) {
+	$('.button').click(function(evt) {
 		var button = $(this);
 		button.addClass('selected').siblings().removeClass('selected');
 

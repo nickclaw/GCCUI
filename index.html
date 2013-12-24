@@ -17,17 +17,24 @@
 	</head>
 
 	<body>
-		<div id="header">
-			<div class="container">
-				<img id="logo" src="image/logo.png" />
+		<div class="position:fixed;">
+			<div id="header">
+				<div class="container">
+					<img id="logo" src="image/logo.png" />
+					<div class="other">
+						<a class="button" href="http://closure-compiler.appspot.com/home" target="_blank">official</a>
+						<a class="button" href="https://developers.google.com/closure/compiler/docs/api-ref" target="_blank">docs</a>
+						<a class="button" href="" target="_blank">help</a>
+					</div>
+				</div>
 			</div>
-		</div>
 
-		<div id="nav">
-			<div class="container">
-				<div class="button selected" data-action="expand" data-target="#upload">upload</div>
-				<div class="button" data-action="expand" data-target="#settings">customize</div>
-				<div class="button" data-action="expand" data-target="#result">review</div>
+			<div class="nav">
+				<div class="container">
+					<div class="button selected" data-action="expand" data-target="#upload">upload</div>
+					<div class="button" data-action="expand" data-target="#settings">customize</div>
+					<div class="button" data-action="expand" data-target="#result">review</div>
+				</div>
 			</div>
 		</div>
 
@@ -120,7 +127,70 @@
 				</div>
 				<div id="result" class="page" data-parent="#pages">
 					<div class="content">
-						
+						<div id="stats">
+							<div class="time">
+								<ul>
+									<li>Compile Time - </li>
+									<li>Request Time - </li>
+									<li>Total Time - </li>
+								</ul>
+
+								<ul>
+									<li>Errors - </li>
+									<li>Warning - </li>
+								</ul>
+
+								<ul>
+									<li>Available at - </li>
+								</ul>
+							</div>
+							<div id="graph">
+								<div class="bar">
+									<div>
+										<div class="bar">
+											<div class="value" data-size="n/a" style="height:50px;"></div>
+											<div class="label">normal</div>
+										</div>
+										<div class="bar">
+											<div class="value" data-size="n/a" style="height:50px;"></div>
+											<div class="label">gzipped</div>
+										</div>
+									</div>
+									<div class="label">original</div>
+								</div>
+								<div class="bar">
+									<div>
+										<div class="bar">
+											<div class="value" data-size="n/a" style="height:50px;"></div>
+											<div class="label">normal</div>
+										</div>
+										<div class="bar">
+											<div class="value" data-size="n/a" style="height:50px;"></div>
+											<div class="label">gzipped</div>
+										</div>
+									</div>
+									<div class="label">compressed</div>
+								</div>
+							</div>
+						</div>
+						<div class="nav">
+							<div class="container">
+								<div class="button selected" data-action="expand" data-target="#compiled">code</div>
+								<div class="button" data-action="expand" data-target="#problems">errors<span id="errorCount"></span></div>
+							</div>
+						</div>
+						<div id="info">
+							<div id="compiled" class="page expand">
+								<div class="content">
+									<textarea disabled="disabled">// testing</textarea>
+								</div>
+							</div>
+							<div id="problems" class="page">
+								<div class="content">
+
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

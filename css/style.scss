@@ -7,6 +7,7 @@ $containerWidth: 800px;
 @import "content.scss";
 @import "upload.scss";
 @import "columns.scss";
+@import "result.scss";
 
 * {
 	margin: 0px;
@@ -25,6 +26,14 @@ body, html {
 		left: auto;
 		right: auto;
 	}
+
+	> * {
+		display: inline-block;
+	}
+
+	.other {
+		float: right;
+	}
 }
 
 #header {
@@ -38,7 +47,18 @@ body, html {
 	z-index: 15; // higher than codemirror
 
 	.button {
+		min-width: 50px;
+		line-height: $headerHeight;
+		font-size: 15pt;
+		color: #808080;
+		text-decoration: none;
+	}
+	.button:not(:first-of-type) {
+		border-left: solid 1px #D0D0D0;
+	}
 
+	.button:hover {
+		text-decoration: underline;
 	}
 }
 
@@ -47,16 +67,17 @@ body, html {
 	padding: 10px 20px 10px 5px;
 }
 
-#nav {
+.nav {
 	height: $navHeight;
 	width: 100%;
 	min-width: $containerWidth;
-	position: absolute;
+	position: fixed;
 	top: $headerHeight;
 	background-color: #444;
 	font-size: 0px;
 	z-index: 14;
 	.button {
+		font-size: 14pt;
 		width: 33.333%; // 100% / #buttons
 		line-height: $navHeight;
 	}
@@ -79,11 +100,12 @@ body, html {
 
 	.page {
 		width: 0px;
+		max-height: 0px;
 		display: inline-block;
 		vertical-align:top;
 		overflow: hidden;
 		opacity: 0;
-		-webkit-transition: width .4s ease, opacity .4s ease;
+		-webkit-transition: width .4s ease, max-height .4s ease, opacity .4s ease;
 
 		.content {
 			width: $containerWidth;
@@ -93,6 +115,7 @@ body, html {
 
 	.page.expand {
 		width: $containerWidth;
+		max-height: 100%;
 		opacity: 1;
 	}
 }
@@ -131,7 +154,7 @@ body, html {
 }
 
 .overlay {
-	z-index: 14; // #nav <= z-index < #header
+	z-index: 14; // .nav <= z-index < #header
 	width: 100%;
 	height: 100%;
 	position: fixed;
