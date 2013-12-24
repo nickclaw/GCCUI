@@ -1,7 +1,7 @@
 // opens the systems default file picker, calls onchange callback with FileList of chosen file(s)
 // TODO make sure this trick works on all browsers (tested on Chrome 31, Safari 7)
 function openFileDialogue(onchange) {
-	$( document.createElement('input') )
+	$('<input>')
 		.attr('type', 'file')
 		.attr('multiple', 'multiple')
 		.on('change', onchange)

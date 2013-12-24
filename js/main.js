@@ -1,5 +1,5 @@
 "use strict";
-
+var compiler;
 $(function() {
 
 	// create codemirror javascript editor
@@ -96,6 +96,7 @@ $(function() {
 				old[0].script.code = editor.getValue();
 			}
 			editor.setValue(current[0].script.code);
+			$('#codeTitle').text(current[0].script.title);
 		})
 
 		// check to see if editor should be visible
@@ -103,4 +104,7 @@ $(function() {
 			check();
 		});
 	});
+
+	compiler = new Compiler(codeManager, externManager, $('form'));
+
 });

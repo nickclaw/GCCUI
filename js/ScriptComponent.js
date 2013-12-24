@@ -62,7 +62,7 @@ $.fn.scriptify = function() {
 				.append( $('<span>')
 					.addClass('delete')
 					.click(function(evt) {
-						var index = $('.script-element').index($('.script-element.selected'));
+						var index = $('.script-element').index(scriptElement); // get this before we delete it
 						scriptElement.remove();
 
 						dispatch('delete', []);
@@ -89,6 +89,15 @@ $.fn.scriptify = function() {
 
 			// finally autoclick the new script element
 			scriptElement.click();
+		},
+
+		getScripts : function() {
+			return container
+				.find('.script-element')
+				.map(function(index, element) {
+					return element.script;
+				})
+				.toArray();
 		}
 	}
 
