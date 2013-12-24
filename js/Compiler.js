@@ -14,6 +14,23 @@ function Compiler(scripts, externs, form) {
 		var externs = self.externManager.getScripts();
 		var scripts = self.scriptManager.getScripts();
 
+
+		// add noncustomizable settings
+		settings.push({
+			name : 'output_format',
+			value : 'json'
+		});
+		settings.push({
+			name : 'language',
+			value : 'ECMASCRIPT3'
+		});
+		$.each(['compiled_code', 'warnings', 'errors', 'statistics'], function(index, value) {
+			settings.push({
+				name : 'output_info',
+				value : value
+			});
+		});
+
 		// concatenate externs into js_externs while building array externs_url's
 		var externs_url = [];
 		var js_externs = externs.reduce(function(prev, curr, index, array) {
@@ -36,6 +53,43 @@ function Compiler(scripts, externs, form) {
 			}
 		}, "/** @preserve compiled using the GccUI */\n");
 
-		console.log(settings, js_code);
+
+		// add each url to settings
+		$.each(externs_url, function(index, value) {
+			settings.push({
+				name : 'externs_url',
+				value : value
+			})
+		});
+		$.each(code_url, function(index, value) {
+			settings.push({
+				name : 'code_url',
+				value : value
+			});
+		});
+
+
+		// add code and externs to settings
+		settings.push({
+			name : 'js_externs',
+			value : encodeURIComponent(js_externs)
+		})
+		settings.push({
+			name : 'js_code',
+			value : encodeURIComponent(js_code)
+		});
+
+		// concatenate settings into post data
+		var postData = settings.reduce(function(prev, curr, index, array) {
+			if (curr.value) {
+				return prev + curr.name + '=' + curr.value + (array.length - 1 > index ? '&' : '');
+			} else {
+				return prev;
+			}
+		}, "");
+
+		$.post('http://closure-compiler.appspot.com/compile', postData, function(data, status, xhr) {
+			console.log(data);
+		}, 'json');
 	}
 }

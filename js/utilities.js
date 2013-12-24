@@ -18,29 +18,49 @@ function readFile(file, callback) {
 	reader.readAsText(file);
 }
 
+/**
+ * Open a dialogue box
+ * param title = string
+ * param buttons = string array
+ * param content = jqueryable object
+ * param doSettings = callback(dialougue jquery, overlay jquery)
+ */
+function openDialogue(title, buttons, content, doSettings) {
+	$(document.body)
+		.append(
+			$('<div>').addClass('overlay'),
+			$('<div>').addClass('dialogue')
+				.append(
+					$('<h3>').text(title),
+					$(content),
+					$('<div>')
+						.css('text-align', 'right')
+						.append(
+							$.map(buttons, function(string, value) {
+								return $('<button>')
+									.addClass('control')
+									.attr('data-event', string)
+									.text(string)
+							})
+						)
+				)
+		);
+	doSettings.call(null, $('.dialogue'), $('.overlay'));
+
+}
+
 // opens a dialogue box for URL input
-// TODO make it actually work well and be customizable
 function openUrlDialogue(onurl) {
-	$(document.body).append(
-		$(
-"<div class='overlay'></div>\
-<div class='dialogue'>\
-<h3>Enter a URL</h3>\
-<div>\
-	<input />\
-</div>\
-<button class='right control' data-event='add'>add</button>\
-<button class='left control' data-event='cancel'>cancel</button>\
-</div>"
-		)
-		.delegate('.control', 'click', function(evt) {
-			var button = $(this);
-			if (button.data().event === 'cancel') {
-				$('.overlay, .dialogue').remove();
-			} else if (button.data().event === 'add') {
-				onurl.call(this, $('.dialogue input').val());
-				$('.overlay, .dialogue').remove();
-			}
-		})
-	);
+	openDialogue('Enter a URL', ['cancel', 'add'], $('<input>'), function(dialogue, overlay) {
+		dialogue
+			.delegate('.control', 'click', function(evt) {
+				var button = $(this);
+				if (button.data().event === 'add') {
+					onurl.call(this, $('.dialogue input').val());
+				}
+
+				dialogue.remove();
+					overlay.remove();
+			})
+	});
 }
