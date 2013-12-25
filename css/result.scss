@@ -69,7 +69,6 @@
 	.value {
 		position: absolute;
 		bottom: 20px;
-		background: blue;
 		min-height: 14pt;
 	}
 
@@ -90,5 +89,31 @@
 		width: 100%;
 		min-height: 300px;
 		resize: vertical;
+	}
+}
+
+#origNorm {
+	background: rgb(54, 91, 195);
+}
+
+#origGzip {
+	background: rgb(179, 16, 0);
+}
+
+#compNorm {
+	background: rgb(210, 170, 0);
+}
+
+#compGzip {
+	background: rgb(81, 135, 51);
+}
+
+#problems table {
+	width: 100%;
+	border-spacing: 0px;
+
+	td, th{
+		border: solid 1px black;
+		font-size: 12pt;
 	}
 }

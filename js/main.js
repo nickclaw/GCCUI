@@ -142,9 +142,30 @@ $(function() {
 			$('#compGzip').attr('data-size', compGzip / 1000 + 'kb').css('height', compGzip/max * 100 + "px");
 
 			// fill errors TODO
+			$('#problems tbody').append(
+				$.map( (data.errors || []), function(error, index) {
+					return $('<tr>')
+						.addClass('error')
+						.append( 
+							$('<td>').text(error.error),
+							$('<td>').text(error.line),
+							$('<td>').text(error.file + ' ' + '#' + error.lineno)
+						)
+				})
+			);
 
 			// fill warnings TODO
-
+			$('#problems tbody').append(
+					$.map( (data.warnings || []), function(warning, index) {
+						return $('<tr>')
+							.addClass('warning')
+							.append( 
+								$('<td>').text(warning.warning),
+								$('<td>').text(warning.line),
+								$('<td>').text(warning.file + ' ' + '#' + warning.lineno)
+							)
+					})
+				);
 			//close wait dialogue TODO
 
 			// open page and code textarea by clicking buttons

@@ -71,11 +71,10 @@ function Compiler(scripts, externs, form) {
 		}, "");
 
 		$.post('http://closure-compiler.appspot.com/compile', postData, function(data, status, xhr) {
+			var jsonData;
 			try {
-				var jsonData = JSON.parse(data);
-				onsuccess.call(null, jsonData);
+				jsonData = JSON.parse(data);
 			} catch (e) {
-
 				// google must've returned something like:
 				// Error(18): .....
 				// try to parse it and call on the onerror handler passing the error, coorresponding error object, and the code
@@ -88,7 +87,9 @@ function Compiler(scripts, externs, form) {
 				}
 
 				onerror.call(null, errorMessage, errorObject, errorCode);
+				return;
 			}
+			onsuccess.call(null, jsonData);
 		}, 'text');
 	}
 }
