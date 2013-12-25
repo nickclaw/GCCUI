@@ -7,6 +7,7 @@
 		<!-- for production -->
 		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
 		<script src="js/external/jquery.min.js"></script>
+		<script src="js/closure_errors.js"></script>
 		<script src="js/utilities.js"></script>
 		<script src="js/ScriptComponent.js"></script>
 		<script src="js/Compiler.js"></script>
@@ -38,8 +39,12 @@
 			</div>
 		</div>
 
+
+
 		<div id="container" class="container">
 			<div id="pages">
+
+
 				<div id="upload" class="page expand" data-parent="#pages">
 					<div class="content fourths">
 						<div class="column four">
@@ -74,6 +79,10 @@
 						</div>
 					</div>
 				</div>
+
+
+
+
 				<div id="settings" class="page" data-parent="#pages">
 					<div class="content fourths">
 						<form id="settings">
@@ -102,6 +111,12 @@
 									<label>
 										<input type="checkbox" name="formatting" value="print_input_delimiter" />Print input delimiter
 									</label>
+									<label>
+										<input type="checkbox" name="use_closure_library" value="true" />Use closure library
+									</label>
+									<label>
+										<input type="checkbox" name="exclude_default_externs" value="true" />Exclude default externs
+									</label>
 
 								</fieldset>
 							</div>
@@ -118,6 +133,20 @@
 										<input type="radio" name="warning_level" value="VERBOSE" />Verbose
 									</label>
 								</fieldset>
+
+								<fieldset>
+									<legend>Language</legend>
+									<label>
+										<input type="radio" name="language" value="ECMASCRIPT3" checked="checked"/>ECMAScript 3
+									</label>
+									<label>
+										<input type="radio" name="language" value="ECMASCRIPT5" />ECMAScript 5
+									</label>
+									<label>
+										<input type="radio" name="language" value="ECMASCRIPT5_STRICT" />ECMAScript 5 strict mode
+									</label>
+								</fieldset>
+
 								<fieldset>
 									Output file name <input name="output_file_name" value="script.js" />
 								</fieldset>
@@ -125,35 +154,53 @@
 						</form>
 					</div>
 				</div>
+
+
+
+
 				<div id="result" class="page" data-parent="#pages">
 					<div class="content">
 						<div id="stats">
-							<div class="time">
-								<ul>
-									<li>Compile Time - </li>
-									<li>Request Time - </li>
-									<li>Total Time - </li>
-								</ul>
-
-								<ul>
-									<li>Errors - </li>
-									<li>Warning - </li>
-								</ul>
-
-								<ul>
-									<li>Available at - </li>
-								</ul>
+							<div id="time">
+								<table>
+									<tbody>
+										<tr>
+											<td>compile time</td>
+											<td id="compile-time"></td>
+										</tr>
+										<tr>
+											<td>request time</td>
+											<td id="request-time"></td>
+										</tr>
+										<tr>
+											<td>total time</td>
+											<td id="total-time"></td>
+										</tr>
+										<tr>
+											<td>error count</td>
+											<td id="error-count"></td>
+										</tr>
+										<tr>
+											<td>warning count</td>
+											<td id="warning-count"></td>
+										</tr>
+										<tr>
+											<td>available</td>
+											<td id="code-url"></td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 							<div id="graph">
 								<div class="bar">
 									<div>
 										<div class="bar">
-											<div class="value" data-size="n/a" style="height:50px;"></div>
+											<div id="origNorm" class="value" data-size="n/a" style="height:50px;"></div>
 											<div class="label">normal</div>
 										</div>
 										<div class="bar">
-											<div class="value" data-size="n/a" style="height:50px;"></div>
-											<div class="label">gzipped</div>
+											<div id="origGzip" class="value" data-size="n/a" style="height:50px;"></div>
+											<div class="label">gzip</div>
 										</div>
 									</div>
 									<div class="label">original</div>
@@ -161,12 +208,12 @@
 								<div class="bar">
 									<div>
 										<div class="bar">
-											<div class="value" data-size="n/a" style="height:50px;"></div>
+											<div id="compNorm" class="value" data-size="n/a" style="height:50px;"></div>
 											<div class="label">normal</div>
 										</div>
 										<div class="bar">
-											<div class="value" data-size="n/a" style="height:50px;"></div>
-											<div class="label">gzipped</div>
+											<div id="compGzip" class="value" data-size="n/a" style="height:50px;"></div>
+											<div class="label">gzip</div>
 										</div>
 									</div>
 									<div class="label">compressed</div>
@@ -182,7 +229,7 @@
 						<div id="info">
 							<div id="compiled" class="page expand">
 								<div class="content">
-									<textarea disabled="disabled">// testing</textarea>
+									<textarea id="compiledCode" disabled="disabled">// testing</textarea>
 								</div>
 							</div>
 							<div id="problems" class="page">
@@ -193,13 +240,17 @@
 						</div>
 					</div>
 				</div>
-			</div>
 
+
+			</div>
 		</div>
 
 		<div id="footer">
 			<div class="container">
-
+				<div class="other">
+					<div id="clear-code" class="button">clear</div>
+					<div id="compile-code" class="button">compile</div>
+				</div>
 			</div>
 		</div>
 	</body>

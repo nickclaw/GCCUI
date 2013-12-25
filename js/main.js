@@ -1,5 +1,4 @@
 "use strict";
-var compiler;
 $(function() {
 
 	// create codemirror javascript editor
@@ -105,6 +104,50 @@ $(function() {
 		});
 	});
 
-	compiler = new Compiler(codeManager, externManager, $('form'));
+	// create compiler
+	var compiler = new Compiler(codeManager, externManager, $('form'));
 
+	$('#compile-code').click(function(evt) {
+		// open wait dialogue TODO
+
+		// send compilation request
+		compiler.compile(function(data) {
+			console.log(data);
+
+			// fill table
+			$('#compiledCode').text(data.compiledCode);
+			$("#compile-time").text(data.statistics.compileTime);
+			$("#request-time").text(0);
+			$("#total-time").text(data.statistics.compileTime);
+			$("#error-count").text(data.error && data.errors.length || 0)
+			$("#warning-count").text(data.warnings && data.warnings.length || 0);
+			$("#code-url").html("<a href='http://closure-compiler.appspot.com"+ data.outputFilePath + "' target='_blank'>here</a>");
+
+			// calculate stuff to fill graph
+			var origNorm = data.statistics.originalSize,
+				origGzip = data.statistics.originalGzipSize,
+				compNorm = data.statistics.compressedSize,
+				compGzip = data.statistics.compressedGzipSize;
+			var max = Math.max(origNorm, origGzip, compNorm, compGzip);
+
+			// fill graph
+			$('#origNorm').attr('data-size', origNorm / 1000 + 'kb').css('height', origNorm/max * 100 + "px");
+			$('#origGzip').attr('data-size', origGzip / 1000 + 'kb').css('height', origGzip/max * 100 + "px");
+			$('#compNorm').attr('data-size', compNorm / 1000 + 'kb').css('height', compNorm/max * 100 + "px");
+			$('#compGzip').attr('data-size', compGzip / 1000 + 'kb').css('height', compGzip/max * 100 + "px");
+
+			// fill errors TODO
+
+			// fill warnings TODO
+
+			//close wait dialogue TODO
+
+			// open page and code textarea by clicking buttons
+			$("[data-target=#result]").click();
+			$("[data-target="(data.errors ? "#compiled" : "problems")"]").click();
+
+		}, function(message, object, code) {
+			console.log(message, object, code);
+		});
+	});
 });

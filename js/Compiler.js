@@ -5,7 +5,7 @@ function Compiler(scripts, externs, form) {
 
 	var self = this;
 
-	this.compile = function(callback) {
+	this.compile = function(onsuccess, onerror) {
 
 		// read form
 		var settings = self.settings.serializeArray();
@@ -31,52 +31,34 @@ function Compiler(scripts, externs, form) {
 			});
 		});
 
-		// concatenate externs into js_externs while building array externs_url's
-		var externs_url = [];
-		var js_externs = externs.reduce(function(prev, curr, index, array) {
-			if (false) {
-				externs_url.push(curr.url);
-				return prev;
+		// push each extern into settings
+		$.each(externs, function(index, value) {
+			if (false) { // for urls
+				settings.push({
+					name : 'externs_url',
+					value : value.url
+				});
 			} else {
-				return prev + "\n" + curr.code;
+				settings.push({
+					name : 'js_externs',
+					value : encodeURIComponent(value.code)
+				});
 			}
-		}, "");
-
-		// concatenate scripts into js_code while building array of code_url's
-		var code_url = [];
-		var js_code = scripts.reduce(function(prev, curr, index, array) {
-			if (false) { // if is just a url
-				code_url.push(curr.url);
-				return prev;
-			} else {
-				return prev + "\n\n" + curr.code;
-			}
-		}, "/** @preserve compiled using the GccUI */\n");
-
-
-		// add each url to settings
-		$.each(externs_url, function(index, value) {
-			settings.push({
-				name : 'externs_url',
-				value : value
-			})
-		});
-		$.each(code_url, function(index, value) {
-			settings.push({
-				name : 'code_url',
-				value : value
-			});
 		});
 
-
-		// add code and externs to settings
-		settings.push({
-			name : 'js_externs',
-			value : encodeURIComponent(js_externs)
-		})
-		settings.push({
-			name : 'js_code',
-			value : encodeURIComponent(js_code)
+		// push each script into settings
+		$.each(scripts, function(index, value) {
+			if (false) { // for urls
+				settings.push({
+					name : 'js_url',
+					value : value.url
+				});
+			} else {
+				settings.push({
+					name : 'js_code',
+					value : encodeURIComponent(value.code)
+				});
+			}
 		});
 
 		// concatenate settings into post data
@@ -89,7 +71,24 @@ function Compiler(scripts, externs, form) {
 		}, "");
 
 		$.post('http://closure-compiler.appspot.com/compile', postData, function(data, status, xhr) {
-			console.log(data);
-		}, 'json');
+			try {
+				var jsonData = JSON.parse(data);
+				onsuccess.call(null, jsonData);
+			} catch (e) {
+
+				// google must've returned something like:
+				// Error(18): .....
+				// try to parse it and call on the onerror handler passing the error, coorresponding error object, and the code
+				var error = data.match(/^Error\(([0-9]*)\):\ (.*)/) || [];
+				var errorCode = error[1] || -1;
+				var errorMessage = error[2] || "Uknown error.";
+				var errorObject = error_codes[errorCode] || {
+					error : errorMessage,
+					description : 'Google returned something we didn\'t understand. Sorry!'
+				}
+
+				onerror.call(null, errorMessage, errorObject, errorCode);
+			}
+		}, 'text');
 	}
 }
