@@ -78,12 +78,7 @@ $(function() {
 		// TODO make it work
 		.on('url', function(evt) {
 			openUrlDialogue(function(url) {
-				$.ajax(url, {
-					success : function() {
-						console.log(this, arguments);
-					},
-					crossDomain : true
-				});
+				manager.newUrl(url);
 			});
 		})
 
@@ -91,10 +86,20 @@ $(function() {
 		// also check to see if editor should be visible
 		.on('select', function(old, current) {
 			check();
-			if (old.size() > 0) {
+			if (old.size() > 0 && old[0].script.type === 'code') {
 				old[0].script.code = editor.getValue();
 			}
-			editor.setValue(current[0].script.code);
+
+			if (current[0].script.type === 'code') {
+				$('#codeUrlInstructions').addClass('hidden');
+				$('#codeContainer').removeClass('hidden');
+				editor.setValue(current[0].script.code);
+			} else if (current[0].script.type === 'url') {
+				$('#urlTitle').html('<a href="' + current[0].script.url + '">' + current[0].script.url + '</a>');
+				$('#codeUrlInstructions').removeClass('hidden');
+				$('#codeContainer').addClass('hidden');
+			}
+
 			$('#codeTitle').text(current[0].script.title);
 		})
 
@@ -144,7 +149,7 @@ $(function() {
 
 			// open page and code textarea by clicking buttons
 			$("[data-target=#result]").click();
-			$("[data-target="(data.errors ? "#compiled" : "problems")"]").click();
+			$("[data-target="+(data.errors ? "#compiled" : "problems")+"]").click();
 
 		}, function(message, object, code) {
 			console.log(message, object, code);

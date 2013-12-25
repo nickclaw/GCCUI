@@ -33,12 +33,12 @@ function Compiler(scripts, externs, form) {
 
 		// push each extern into settings
 		$.each(externs, function(index, value) {
-			if (false) { // for urls
+			if (value.type === 'url') { // for urls
 				settings.push({
 					name : 'externs_url',
 					value : value.url
 				});
-			} else {
+			} else if (value.type === 'code') {
 				settings.push({
 					name : 'js_externs',
 					value : encodeURIComponent(value.code)
@@ -48,12 +48,12 @@ function Compiler(scripts, externs, form) {
 
 		// push each script into settings
 		$.each(scripts, function(index, value) {
-			if (false) { // for urls
+			if (value.type === 'url') { // for urls
 				settings.push({
 					name : 'js_url',
 					value : value.url
 				});
-			} else {
+			} else if (value.type === 'code') {
 				settings.push({
 					name : 'js_code',
 					value : encodeURIComponent(value.code)

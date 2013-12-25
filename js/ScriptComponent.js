@@ -51,7 +51,7 @@ $.fn.scriptify = function() {
 		},
 
 		// create and add a new script
-		newScript : function(title, code) {
+		newScript : function(title, code, url) {
 
 			// create a new script element
 			var scriptElement = $('<div>')
@@ -81,14 +81,26 @@ $.fn.scriptify = function() {
 				.append(scriptElement)
 				.sortable();
 
+			var script = { title : title };
+			if ( code !== null ) {
+				script.code = code;
+				script.type = 'code';
+			}
+			if ( url ) {
+				script.url = url;
+				script.type = 'url';
+			}
+
 			// bond the script data to the element
-			scriptElement[0].script = {
-				title : title,
-				code : code
-			};
+			scriptElement[0].script = script;
 
 			// finally autoclick the new script element
 			scriptElement.click();
+		},
+
+		newUrl : function(url) {
+			var title = url.match(/[a-zA-z\-\.]*\.js$/) || (url.length > 15 ? '...'+url.slice(url.length - 12) : url);
+			this.newScript(title, null, url)
 		},
 
 		getScripts : function() {
