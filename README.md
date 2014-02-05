@@ -3,6 +3,8 @@ GCCUI
 
 A better online interface for the Google Closure Compiler
 
+<img title="gccui main page" src="http://nickclaw.com/static/image/pages/gccui/code.png" />
+
 1) Cloning this repository
 -----
 
